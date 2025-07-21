@@ -4,6 +4,20 @@ const Button = (props) => {
   return <button onClick={props.handleClick}>{props.text}</button>;
 };
 
+const Statistics = (props) => {
+  return (
+    <>
+      <h1>statistics</h1>
+      <p>good {props.good}</p>
+      <p>neutral {props.neutral}</p>
+      <p>bad {props.bad}</p>
+      <p>all {props.all}</p>
+      <p>average {Math.round((props.value / props.all) * 100) / 100}</p>
+      <p>positive {Math.round((props.good / props.all) * 10000) / 100}%</p>
+    </>
+  );
+}
+
 const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -28,13 +42,7 @@ const App = () => {
         setAll(all + 1);
         setValue(value - 1);
       }} text="bad" />
-      <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {all}</p>
-      <p>average {Math.round(value / all * 100 ) / 100}</p>
-      <p>positive {Math.round(good / all * 10000) / 100}%</p>
+      {all>0 && <Statistics good={good} neutral={neutral} bad={bad} all={all} value={value} />}
     </div>
   );
 };
