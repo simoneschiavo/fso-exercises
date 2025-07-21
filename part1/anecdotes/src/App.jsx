@@ -12,7 +12,16 @@ const App = () => {
     "The only way to go fast, is to go well.",
   ];
 
-  const [votes, setVotes] = useState({ 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 });
+  const [votes, setVotes] = useState({
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+  });
   const [selected, setSelected] = useState(0);
 
   const handleVote = () => {
@@ -23,10 +32,32 @@ const App = () => {
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
-      <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote</button>
+      <button
+        onClick={() =>
+          setSelected(Math.floor(Math.random() * anecdotes.length))
+        }
+      >
+        next anecdote
+      </button>
       <button onClick={handleVote}>vote</button>
+      <h1>Anecdote with most votes</h1>
+      {(() => {
+        const maxVotes = Math.max(...Object.values(votes));
+        const maxIndex = Object.keys(votes).find(
+          (key) => votes[key] === maxVotes
+        );
+        return maxVotes === 0 ? (
+          <p>No votes yet</p>
+        ) : (
+          <>
+            <p>{anecdotes[maxIndex]}</p>
+            <p>has {maxVotes} votes</p>
+          </>
+        );
+      })()}
     </div>
   );
 };
