@@ -12,12 +12,21 @@ const App = () => {
     "The only way to go fast, is to go well.",
   ];
 
+  const [votes, setVotes] = useState({ 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 });
   const [selected, setSelected] = useState(0);
+
+  const handleVote = () => {
+    const newVotes = { ...votes };
+    newVotes[selected]++;
+    setVotes(newVotes);
+  };
 
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
       <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote</button>
+      <button onClick={handleVote}>vote</button>
     </div>
   );
 };
