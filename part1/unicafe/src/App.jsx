@@ -4,16 +4,22 @@ const Button = (props) => {
   return <button onClick={props.handleClick}>{props.text}</button>;
 };
 
+const StatisticLine = (props) => {
+  return (
+    <p>{props.text} {props.statistic}</p>
+  )
+}
+
 const Statistics = (props) => {
   return (
     <>
       <h1>statistics</h1>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.all}</p>
-      <p>average {Math.round((props.value / props.all) * 100) / 100}</p>
-      <p>positive {Math.round((props.good / props.all) * 10000) / 100}%</p>
+      <StatisticLine text="good" statistic={props.good} />
+      <StatisticLine text="neutral" statistic={props.neutral} />
+      <StatisticLine text="bad" statistic={props.bad} />
+      <StatisticLine text="all" statistic={props.all} />
+      <StatisticLine text="average" statistic={Math.round((props.value / props.all) * 100) / 100} />
+      <StatisticLine text="positive" statistic={Math.round((props.good / props.all) * 10000) / 100 + "%"} />
     </>
   );
 }
